@@ -15,7 +15,6 @@
     1. `gcc -c *.c`
     2. `gcc -o runnable *.o`
     3. `./runnable`
-6. Now the program should be running, allowing you to convert between different numbers
 
 ## The functions:
 
