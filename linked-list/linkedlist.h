@@ -13,8 +13,8 @@ typedef struct LinkedList {
 } LinkedList;
 
 LinkedList* linked_list();
-LinkedList* addLast(LinkedList* list, void* data);
-LinkedList* addFirst(LinkedList* list, void* data);
+void addLast(LinkedList* list, void* data);
+void addFirst(LinkedList* list, void* data);
 void* get(LinkedList* list, int index);
 
 int indexOf(LinkedList* list, void* data);
@@ -54,5 +54,12 @@ void clear(LinkedList* list);
 int size(LinkedList* list);
 
 void dump_list(LinkedList* list);
+
+// Tests
+
+void run_tests();
+
+int assert(int actual, int expected, int test_num);
+int convert_void_ptr_to_int(void* annoying_ptr);
 
 #endif
