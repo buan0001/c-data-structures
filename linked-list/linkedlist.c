@@ -11,26 +11,43 @@ int main() {
   test_node->data = &some_number;
 
   printf("Size of node (Node*, Node*, void*): %d\n", sizeof(Node));
+  printf("\n===========\n\n");
 
   // Note: Data is a void pointer, so first cast it to the appropriate data
   // type pointer Then we can dereference the data pointer
   printf("Test.data: %d\n", *((int*)test_node->data));
+  printf("\n===========\n\n");
 
   printf("Head: %p. Tail: %p\n", list->head, list->tail);
   addNodeFirst(list, test_node);
   printf("Head: %p. Tail: %p\n", list->head, list->tail);
 
+  printf("\n===========\n\n");
   int some_other_number = 23;
 
   printf("Node with data. Actual: %p. Expected: %p\n",
          getNode(list, &some_number), &test_node);
   printf("Node with data. Actual: %p. Expected: %p\n",
          getNode(list, &some_other_number), NULL);
+
+  printf("\n===========\n\n");
+
   dump_list(list);
   addFirst(list, &some_other_number);
   // addLast(list, &some_other_number);
-  printf("Last: %d. Expected: %d\n", last(list), some_number);
+  printf("Last: %d. Expected: %d\n", *((int*)(last(list)->data)), some_number);
+  
+
+  int add_last_num = 51;
+  addLast(list, &add_last_num);
+
+  printf("Last: %d. Expected: %d\n", *((int*)(last(list)->data)), add_last_num);
   dump_list(list);
+  printf("\n===========\n\n");
+  
+  printf("Head: %p. Tail: %p\n", list->head, list->tail);
+  
+  printf("\n===========\n\n");
 
   // Free all the nodes first
   clear(list);
@@ -59,7 +76,9 @@ LinkedList* addLast(LinkedList* list, void* data) {
 LinkedList* addFirst(LinkedList* list, void* data) {
   Node* new_node = malloc(sizeof(new_node));
   if (new_node == NULL) exit(1);
+  printf("Incoming data adr: %p\n", data);
   new_node->data = data;
+  printf("new node data adr: %p\n", new_node->data);
   addNodeFirst(list, new_node);
 }
 
@@ -108,15 +127,19 @@ Node* last(LinkedList* list) { return list->tail; }
 
 Node* getNode(LinkedList* list, void* data) {
   Node* current_node = list->head;
-  printf("CurentNodes next: %p\n", current_node->next);
+  printf("current node's next: %p\n", current_node->next);
   while (current_node) {
+    printf("Current adress: %p. Next: %p. Prev: %p. Data: %d\n", current_node,
+           current_node->next, current_node->prev,
+           *((int*)(current_node->data)));
     if (current_node->data == data) {
       return current_node;
     }
-    printf("CurentNodes next: %p\n", current_node->next);
+    printf("current node's next: %p\n", current_node->next);
     current_node = current_node->next;
   }
   // This will be the same as return NULL;
+
   return current_node;
 }
 
@@ -160,6 +183,7 @@ void addNodeFirst(LinkedList* list, Node* newNode) {
   list->head = newNode;
   if (previous_head != NULL) {
     list->head->next = previous_head;
+    list->head->prev = NULL;
     previous_head->prev = list->head;
   }
   // If head was previously null, that means the list was empty so there also
@@ -174,6 +198,7 @@ void addNodeLast(LinkedList* list, Node* newNode) {
   list->tail = newNode;
   if (previous_tail != NULL) {
     list->tail->prev = previous_tail;
+    list->tail->next = NULL;
     previous_tail->next = list->tail;
   }
   // If tail was previously null, that means the list was empty so there also
@@ -261,9 +286,11 @@ int size(LinkedList* list) {
 
 void dump_list(LinkedList* list) {
   Node* current = list->head;
+  printf("\nDumping list:\n");
   while (current) {
     printf("Current adress: %p. Next: %p. Prev: %p. Data: %d\n", current,
            current->next, current->prev, *((int*)(current->data)));
     current = current->next;
   }
+  printf("\n");
 }
