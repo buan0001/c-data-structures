@@ -47,44 +47,14 @@ void run_tests() {
   wrongs_corrects[assert(indexOf(list, &second_num) == 0, 1, test_num++)]++;
   wrongs_corrects[assert(indexOf(list, &random_number) == -1, 1, test_num++)]++;
 
-  //   Node* test_node1 = malloc(sizeof(Node));
-  //   test_node1->data = &first_num;
+  // InsertAfter
+  int insert_after_num = 104;
+  insertAfter(list, 1, &insert_after_num);
+  printf("index of new val: %d\n", indexOf(list, &insert_after_num));
+  wrongs_corrects[assert(indexOf(list, &insert_after_num), 2, test_num++)]++;
 
-  //   Node* test_node2 = malloc(sizeof(Node));
-  //   test_node2->data = &second_num;
+  dump_list(list);
 
-  //   printf("\n===========\n\n");
-  int third_num = 23;
-  //   wrongs_corrects[getNode(list, &third_num) == NULL]++;
-  //   wrongs_corrects[getNode(list, &first_num) == test_node1]++;
-
-  //   printf("Node with data. Actual: %p. Expected: %p\n",
-  //          getNode(list, &some_number), &test_node1);
-  //   printf("Node with data. Actual: %p. Expected: %p\n",
-  //          getNode(list, &some_other_number), NULL);
-
-  //   printf("\n===========\n\n");
-
-  //       dump_list(list);
-  //   addFirst(list, &second_num);
-  //   // addLast(list, &some_other_number);
-  //   printf("Last: %d. Expected: %d\n", *((int*)(last(list)->data)),
-  //   first_num);
-
-  //   int add_last_num = 51;
-  //   addLast(list, &add_last_num);
-
-  //   printf("Last: %d. Expected: %d\n", *((int*)(last(list)->data)),
-  //   add_last_num); dump_list(list); printf("\n===========\n\n");
-
-  //   printf("Head: %p. Tail: %p\n", list->head, list->tail);
-
-  //   printf("\n===========\n\n");
-
-  //   Node* empty_node = malloc(sizeof(Node));
-
-  //   insertAfterNode(list, empty_node, list->head);
-  //   dump_list(list);
   printf("\n===========\n\n");
   printf("Corrects: %d\n", wrongs_corrects[1]);
   printf("Wrongs: %d\n", wrongs_corrects[0]);
