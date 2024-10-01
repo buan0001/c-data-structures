@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 LinkedList* linked_list() {
   LinkedList* new_list = malloc(sizeof(LinkedList));
   // printf("size of linked list (Node*, Node*): %d\n", sizeof(LinkedList));
@@ -94,8 +93,8 @@ void removeNodeWithData(LinkedList* list, void* data) {
 }
 
 void removeAtIndex(LinkedList* list, int index) {
-  Node* found = get(list, index);
-  if (found){
+  Node* found = nodeAt(list, index);
+  if (found) {
     removeNode(list, found);
   }
 }
@@ -200,7 +199,7 @@ void removeNode(LinkedList* list, Node* existingNode) {
 }
 
 Node* nodeAt(LinkedList* list, int index) {
-  if (index < 0){
+  if (index < 0) {
     return NULL;
   }
   Node* current_node = list->head;
@@ -223,6 +222,8 @@ void swapNodes(LinkedList* list, Node* first_node, Node* second_node) {
 
 void clear(LinkedList* list) {
   Node* current_node = list->head;
+
+  // Free every node, they aren't automatically removed
   while (current_node) {
     Node* next_node = current_node->next;
     free(current_node);
@@ -247,7 +248,8 @@ void dump_list(LinkedList* list) {
   printf("\nDumping list:\n");
   while (current) {
     printf("Current adress: %p. Next: %p. Prev: %p. Data: %d\n", current,
-           current->next, current->prev, *((int*)(current->data)));
+           current->next, current->prev,
+           convert_void_ptr_to_int(current->data));
     current = current->next;
   }
   printf("\n");

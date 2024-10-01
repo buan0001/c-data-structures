@@ -55,11 +55,11 @@ int size(LinkedList* list);
 
 void dump_list(LinkedList* list);
 
+int convert_void_ptr_to_int(void* annoying_ptr);
 // Tests
 
 void run_tests();
 
 int assert(int actual, int expected, int test_num);
-int convert_void_ptr_to_int(void* annoying_ptr);
 
 #endif

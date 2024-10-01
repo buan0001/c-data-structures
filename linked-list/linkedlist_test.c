@@ -58,17 +58,15 @@ void run_tests() {
   printf("\n===========\n\n");
   printf("Corrects: %d\n", wrongs_corrects[1]);
   printf("Wrongs: %d\n", wrongs_corrects[0]);
+
+  // Too lazy to test everything. Hopefully the rest just works
+
   // Free all the nodes first
   clear(list);
   // Then free the list;
   free(list);
 }
 
-// int run_single_node_test(LinkedList* list, Node* test_node,
-// void(*func)(LinkedList*, Node*))
-// {
-
-// }
 
 int convert_void_ptr_to_int(void* annoying_ptr) {
   return *((int*)annoying_ptr);
